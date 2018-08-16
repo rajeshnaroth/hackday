@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { GET_WEATHER, UPDATE_ZIPCODE } from './actions';
 import { initialWeatherState, weatherReducer } from './state';
+import WeatherWidget from './WeatherWidget';
+import WeatherForm from './WeatherForm';
+import GithubList from '../github/GithubList';
 
 class Weather extends Component {
   state = initialWeatherState(this.props);
@@ -34,26 +36,15 @@ class Weather extends Component {
   }
 
   render() {
-    const { zipcode } = this.state;
     return (
       <section>
-        <h4>{zipcode}</h4>
-        <h5>Right Now it is {this.state.temp.current} F</h5>
-        <Form inline>
-          <FormGroup inline>
-            <Label for="zipcode">Email</Label>
-            <Input
-              width="8"
-              type="text"
-              value={zipcode}
-              onChange={this.updateZipcode}
-              onEnter={this.reloadData}
-            />
-            <Button color="danger" onClick={this.reloadData}>
-              OK!
-            </Button>
-          </FormGroup>
-        </Form>
+        <WeatherWidget zipcode={this.state.zipcode} temp={this.state.temp} />
+        <WeatherForm
+          zipcode={this.state.zipcode}
+          updateZipcode={this.updateZipcode}
+          reloadData={this.reloadData}
+        />
+        <GithubList search="angular" />
       </section>
     );
   }

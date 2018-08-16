@@ -8,7 +8,7 @@ const initialWeatherState = props => {
       min: 0,
       max: 0
     },
-    zipcode: props.zipcode
+    zipcode: props.zipcode || props.match.params.zipcode || '95132'
   };
 };
 
